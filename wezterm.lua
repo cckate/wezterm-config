@@ -69,7 +69,19 @@ config.enable_tab_bar = true
 
 
 -- -- || -- 快捷键设置 (Keybindings) -- ||
+
+-- 启用 WezTerm 内置的默认链接检测规则
+-- 这能自动识别 http, https, ftp, mailto, file 等多种格式
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
 config.keys = {
+  -- 当按下 CTRL 键并单击鼠标左键时
+  {
+    -- 事件：鼠标左键单击一次并释放
+    event = { Up = { streak = 1, button = 'Left' } },
+    -- 执行的动作：打开当前鼠标光标下的链接
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
   -- 定义一个快捷键来关闭当前的窗格(Pane)或标签页(Tab)
   -- 我们将它绑定到 CTRL+W
   {
